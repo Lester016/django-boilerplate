@@ -6,6 +6,9 @@ from .forms import UserRegisterForm
 
 # Create your views here.
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect("home")
+
     if request.method == "POST":
         # Get form data
         username = request.POST["username"]
@@ -24,6 +27,9 @@ def login_user(request):
 
 
 def register_user(request):
+    if request.user.is_authenticated:
+        return redirect("home")
+
     form = UserRegisterForm()  # Django Built-in views.
 
     if request.method == "POST":
