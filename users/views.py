@@ -52,3 +52,8 @@ def register_user(request):
 def logout_user(request):
     logout(request)
     return redirect("login")
+
+
+@login_required
+def profile(request):
+    return render(request, "users/profile.html", {})
