@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -55,5 +56,8 @@ def logout_user(request):
 
 
 @login_required
-def profile(request):
-    return render(request, "users/profile.html", {})
+def profile(request, pk):
+    user = User.objects.get(pk=pk)
+
+    context = {"user": user}
+    return render(request, "users/profile.html", context)
